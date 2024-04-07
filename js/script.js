@@ -28,12 +28,14 @@ const hm = document.querySelector("#hamburger-menu");
 const sb = document.querySelector("#search-button");
 const sc = document.querySelector("#shopping-cart-button");
 
+// Periksa apakah yang diklik bukan bagian dari hamburger atau navbarNav
 document.addEventListener("click", function (e) {
-  if (!hamburger.contains(e.target) && !navbarNav.contains(e.target)) {
+  if (!hm.contains(e.target) && !navbarNav.contains(e.target)) {
     navbarNav.classList.remove("active");
   }
 });
 
+// Periksa apakah yang diklik bukan bagian dari search button atau search form
 document.addEventListener("click", function (e) {
   if (!sb.contains(e.target) && !searchForm.contains(e.target)) {
     searchForm.classList.remove("active");

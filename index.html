@@ -22,7 +22,13 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
     <!-- App -->
-    <script src="src/app.js"></script>
+    <script src="src/app.js" async></script>
+    <!-- Midtrans -->
+    <script
+      type="text/javascript"
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      data-client-key="SB-Mid-client-1NGwmA8JLZJxL6hr"
+    ></script>
   </head>
   <body>
     <!-- Navbar Start -->
@@ -43,8 +49,8 @@
           <i data-feather="shopping-cart"></i>
           <span
             class="qty-badge"
-            x-show="$store.cart.qty"
-            x-text="$store.cart.qty"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
           ></span>
         </a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
@@ -69,7 +75,7 @@
                 <button id="remove" @click="$store.cart.remove(item.id)">
                   &minus;
                 </button>
-                <span x-text="item.qty"></span>
+                <span x-text="item.quantity"></span>
                 <button id="add" @click="$store.cart.add(item)">&plus;</button>
                 &equals;
                 <span x-text="rupiah(item.total)"></span>
@@ -87,6 +93,13 @@
 
         <div class="form-container" x-show="$store.cart.items.length">
           <form action="" id="checkoutForm">
+            <input
+              type="hidden"
+              name="items"
+              x-model="JSON.stringify($store.cart.items)"
+            />
+            <input type="hidden" name="total" x-model="$store.cart.total" />
+
             <h5>Customer Detail</h5>
 
             <label for="name">
@@ -103,7 +116,7 @@
             </label>
 
             <button
-              class="checkout-button"
+              class="checkout-button disabled"
               id="checkout-button"
               type="submit"
               value="checkout"
